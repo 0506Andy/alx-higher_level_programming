@@ -1,3 +1,6 @@
 #!/bin/bash
-# This script sends a GET request to a URL and displays the body of the response if the status code is 200
-curl -s -o /dev/null -w "%{http_code}" "$1" | grep -q "200" && curl -s "$1"
+# This script sends a GET request and displays the body of the response for a 200 status code
+if curl -s -f -o response_body "$1"; then
+    cat response_body
+fi
+rm -f response_body
