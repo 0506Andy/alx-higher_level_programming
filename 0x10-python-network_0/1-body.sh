@@ -1,9 +1,3 @@
 #!/bin/bash
-url=$1
-response=$(curl -s -o response_body -w "%{http_code}" "$url")
-if [ "$response" -eq 200 ]; then
-    cat response_body
-else
-    echo "The request did not return a status code of 200."
-fi
-rm response_body
+# This script sends a GET request to a URL and displays the body of the response if the status code is 200
+curl -s -o /dev/null -w "%{http_code}" "$1" | grep -q "200" && curl -s "$1"
